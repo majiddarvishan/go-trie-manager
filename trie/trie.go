@@ -138,6 +138,9 @@ func (t *trie) findMatching(prefix string, first uint32, last uint32, current *c
 
 	if first < last {
 		index := prefix[first] - '0'
+        if index > 9 {
+            return nil
+        }
 
 		if current.children[index] != nil {
 			return t.findMatching(prefix, first+1, last, current.children[index], lastValidValue)

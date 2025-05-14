@@ -37,7 +37,7 @@ func remove(prefix string) {
 func main() {
 	TrieManagerInstance = trie.NewTrieManager()
 
-	add("a982000", "majid", trie.PrefixNumber)
+	add("982000", "majid", trie.PrefixNumber)
 	add("982000456", "mahdi", trie.ExactNumber)
 	add("9830007863", "ali", trie.ExactNumber)
 	add("9830009856", "saeed", trie.PrefixNumber)
@@ -45,6 +45,8 @@ func main() {
 	add("982000", "meysam", trie.PrefixNumber)
 
     add("982000", "mohammad", trie.PrefixNumber)
+
+    add("a123", "wrong", trie.PrefixNumber)
 
 	find("982000123")
 	find("982000456")
@@ -60,4 +62,6 @@ func main() {
     remove("982000456")
 
 	find("982000456")
+
+    find("test")
 }
