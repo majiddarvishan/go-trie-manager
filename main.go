@@ -19,30 +19,32 @@ func find(number string) {
 func add(prefix, target string, numberType trie.NumberType) {
 	err := TrieManagerInstance.Add(prefix, target, numberType)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf("add prefix {%s} is failed\n", prefix)
 	} else {
-		log.Println("successfully add route")
+		log.Printf("successfully add prefix {%s}\n", prefix)
 	}
 }
 
 func remove(prefix string) {
 	err := TrieManagerInstance.Remove(prefix)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf("remove prefix {%s} is failed\n", prefix)
 	} else {
-		log.Println("successfully remove route")
+		log.Printf("successfully remove prefix {%s}\n", prefix)
 	}
 }
 
 func main() {
 	TrieManagerInstance = trie.NewTrieManager()
 
-	add("982000", "majid", trie.PrefixNumber)
+	add("a982000", "majid", trie.PrefixNumber)
 	add("982000456", "mahdi", trie.ExactNumber)
 	add("9830007863", "ali", trie.ExactNumber)
 	add("9830009856", "saeed", trie.PrefixNumber)
 
-	add("982000", "david", trie.PrefixNumber)
+	add("982000", "meysam", trie.PrefixNumber)
+
+    add("982000", "mohammad", trie.PrefixNumber)
 
 	find("982000123")
 	find("982000456")
@@ -55,6 +57,7 @@ func main() {
 	find("983000198569")
 
 	remove("982000456")
+    remove("982000456")
 
 	find("982000456")
 }

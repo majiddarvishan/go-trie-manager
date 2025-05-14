@@ -10,7 +10,7 @@ type charNode struct {
 	maxLength    uint32
 
 	numberOfChildren uint8
-	children         [256]*charNode
+	children         [10]*charNode
 }
 
 func newCharNode(parent *charNode, depth uint32, index int32) *charNode {
@@ -110,7 +110,10 @@ func (t *trie) cleanUp(current *charNode) {
 
 func (t *trie) createSubTree(prefix string, first uint32, last uint32, current *charNode) *charNode {
 	if first < last {
-		index := prefix[first]
+		index := prefix[first] - '0'
+        if index > 9 {
+            return nil
+        }
 
 		if current.children[index] == nil {
 			current.children[index] = newCharNode(current, current.depth+1, int32(index))
@@ -134,7 +137,7 @@ func (t *trie) findMatching(prefix string, first uint32, last uint32, current *c
 	}
 
 	if first < last {
-		index := prefix[first]
+		index := prefix[first] - '0'
 
 		if current.children[index] != nil {
 			return t.findMatching(prefix, first+1, last, current.children[index], lastValidValue)
